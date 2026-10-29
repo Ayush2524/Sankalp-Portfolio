@@ -353,11 +353,6 @@ function HeroVideo() {
     }
   }, [])
 
-  const onTimeUpdate = () => {
-    const el = videoRef.current
-    if (el && el.muted && el.currentTime >= video.previewSeconds) el.currentTime = 0
-  }
-
   const showControls = () => {
     setControlsVisible(true)
     window.clearTimeout(hideControlsTimer.current)
@@ -396,7 +391,7 @@ function HeroVideo() {
 
   return <>
     <div ref={frame} className="hero-video" onPointerMove={showControls} onPointerEnter={showControls} onPointerLeave={hideControlsNow} onClick={showControls}>
-      <video ref={videoRef} className="hero-native-video" poster={video.poster} src={shouldLoad ? video.src : undefined} autoPlay muted loop playsInline preload="none" onTimeUpdate={onTimeUpdate} onPlay={() => setPreviewPlaying(true)} onPause={() => setPreviewPlaying(false)} onCanPlay={syncPreview} />
+      <video ref={videoRef} className="hero-native-video" poster={video.poster} src={shouldLoad ? video.src : undefined} autoPlay muted loop playsInline preload="none" onPlay={() => setPreviewPlaying(true)} onPause={() => setPreviewPlaying(false)} onCanPlay={syncPreview} />
       <div className={`video-controls ${controlsVisible ? 'is-visible' : ''}`}>
         <button type="button" className="video-toggle-button" aria-label={previewPlaying ? 'Pause video' : 'Play video'} onClick={togglePlay} onFocus={showControls}>
           {previewPlaying
