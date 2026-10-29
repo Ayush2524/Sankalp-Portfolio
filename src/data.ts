@@ -12,7 +12,7 @@ export type MediaItem = {
 export const site = {
   email: 'mailto:hello@sankalpbhitkar.com',
   hero: {
-    video: { src: '/media/hero/sankalp.mp4', poster: '/media/hero/sankalp-poster.jpg', aspect: '16:9' as const, previewSeconds: 6 },
+    video: { src: '/media/hero/sankalp.mp4', poster: '/media/hero/sankalp-poster.jpg', aspect: '16:9' as const },
   },
   aboutPortrait: '/media/sankalp-about.jpg',
   nav: ['impact', 'work', 'about'],
