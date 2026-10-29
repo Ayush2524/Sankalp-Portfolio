@@ -1,0 +1,10 @@
+{
+  "description": "Explore Sankalp Bhitkar’s creative portfolio, showcasing brand strategy, design, content systems, and startup work for consumer brands.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
