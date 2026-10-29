@@ -58,7 +58,7 @@ main>.section:nth-child(even){background:#eceae4}
 .hero-lead{grid-column:9/13;align-self:end}.hero-lead>p{font-size:20px;line-height:1.5;max-width:34ch}.hero-lead .actions{margin-top:28px}
 .registration{position:absolute;bottom:-11px;color:var(--graphite);font:16px 'JetBrains Mono'}.reg-left{left:60px}.reg-right{right:60px}
 .hero-video{position:relative;width:100%;aspect-ratio:16/9;max-height:calc(100svh - 72px);overflow:hidden;background:var(--ink)}
-.hero-native-video{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;background:var(--ink);pointer-events:none}
+.hero-native-video{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:contain;background:var(--ink);pointer-events:none}
 .video-controls{position:absolute;inset:0;z-index:2;pointer-events:none}
 .video-toggle-button{position:absolute;top:50%;left:50%;width:72px;height:72px;padding:0;border:0;border-radius:50%;background:var(--lime);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;transform:translate(-50%,-50%) scale(.85);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
 .video-controls.is-visible .video-toggle-button{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
@@ -66,13 +66,18 @@ main>.section:nth-child(even){background:#eceae4}
 .video-toggle-button path,.video-toggle-button rect{fill:var(--ink)}
 .video-toggle-button:hover{transform:translate(-50%,-50%) scale(1.06)}
 .video-toggle-button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
-.video-mute-button{position:absolute;right:16px;bottom:16px;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:var(--lime);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s}
+.video-mute-button{position:absolute;right:16px;bottom:34px;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:var(--lime);color:var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .25s}
 .video-controls.is-visible .video-mute-button{opacity:1;pointer-events:auto}
 .video-mute-button svg{width:18px;height:18px}
 .video-mute-button path{fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linejoin:miter;stroke-linecap:square}
 .video-mute-button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
-.video-sound-hint{position:absolute;right:66px;bottom:24px;color:var(--lime);font:500 12px/1.2 'JetBrains Mono';letter-spacing:.06em;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s}
+.video-sound-hint{position:absolute;right:66px;bottom:42px;color:var(--lime);font:500 12px/1.2 'JetBrains Mono';letter-spacing:.06em;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .25s}
 .video-controls.is-visible .video-sound-hint{opacity:1}
+.video-progress{position:absolute;left:0;right:0;bottom:0;height:26px;display:flex;align-items:center;padding:0 16px;opacity:0;pointer-events:none;transition:opacity .25s;cursor:pointer;touch-action:none}
+.video-controls.is-visible .video-progress{opacity:1;pointer-events:auto}
+.video-progress-track{position:relative;width:100%;height:4px;background:rgba(246,245,241,.3);border-radius:2px}
+.video-progress-fill{position:absolute;top:0;left:0;height:100%;background:var(--lime);border-radius:2px}
+.video-progress-handle{position:absolute;top:50%;width:11px;height:11px;border-radius:50%;background:var(--lime);transform:translate(-50%,-50%);box-shadow:0 0 0 2px rgba(16,16,18,.45)}
 .video-caption{display:flex;justify-content:space-between;padding:16px 64px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);background:var(--page)}
 .marquee{border-bottom:1px solid var(--hair)}
 .impact h2{font-size:clamp(26px,2.6vw,38px)}.stat strong{font-size:48px}

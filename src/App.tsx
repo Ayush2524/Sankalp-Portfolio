@@ -292,10 +292,13 @@ function HeroVideo() {
   const frameVisible = useRef(false)
   const userPausedRef = useRef(false)
   const hideControlsTimer = useRef(0)
+  const progressBarRef = useRef<HTMLDivElement>(null)
   const [shouldLoad, setShouldLoad] = useState(false)
   const [previewPlaying, setPreviewPlaying] = useState(false)
   const [previewMuted, setPreviewMuted] = useState(true)
   const [controlsVisible, setControlsVisible] = useState(false)
+  const [scrubbing, setScrubbing] = useState(false)
+  const [progress, setProgress] = useState(0)
 
   const syncPreview = () => {
     const el = videoRef.current
@@ -367,6 +370,37 @@ function HeroVideo() {
     return () => window.clearTimeout(hideControlsTimer.current)
   }, [])
 
+  const onTimeUpdate = () => {
+    const el = videoRef.current
+    if (el && el.duration) setProgress(el.currentTime / el.duration)
+  }
+
+  const seekFromClientX = (clientX: number) => {
+    const bar = progressBarRef.current
+    const el = videoRef.current
+    if (!bar || !el || !el.duration) return
+    const rect = bar.getBoundingClientRect()
+    const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width))
+    el.currentTime = ratio * el.duration
+    setProgress(ratio)
+  }
+
+  const onProgressPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    event.stopPropagation()
+    setScrubbing(true)
+    seekFromClientX(event.clientX)
+    showControls()
+    const onMove = (moveEvent: PointerEvent) => seekFromClientX(moveEvent.clientX)
+    const onUp = () => {
+      setScrubbing(false)
+      showControls()
+      window.removeEventListener('pointermove', onMove)
+      window.removeEventListener('pointerup', onUp)
+    }
+    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointerup', onUp, { once: true })
+  }
+
   const togglePlay = () => {
     const el = videoRef.current
     if (!el) return
@@ -391,8 +425,14 @@ function HeroVideo() {
 
   return <>
     <div ref={frame} className="hero-video" onPointerMove={showControls} onPointerEnter={showControls} onPointerLeave={hideControlsNow} onClick={showControls}>
-      <video ref={videoRef} className="hero-native-video" poster={video.poster} src={shouldLoad ? video.src : undefined} autoPlay muted loop playsInline preload="none" onPlay={() => setPreviewPlaying(true)} onPause={() => setPreviewPlaying(false)} onCanPlay={syncPreview} />
-      <div className={`video-controls ${controlsVisible ? 'is-visible' : ''}`}>
+      <video ref={videoRef} className="hero-native-video" poster={video.poster} src={shouldLoad ? video.src : undefined} autoPlay muted loop playsInline preload="none" onTimeUpdate={onTimeUpdate} onPlay={() => setPreviewPlaying(true)} onPause={() => setPreviewPlaying(false)} onCanPlay={syncPreview} />
+      <div className={`video-controls ${controlsVisible || scrubbing ? 'is-visible' : ''}`}>
+        <div ref={progressBarRef} className="video-progress" onPointerDown={onProgressPointerDown}>
+          <div className="video-progress-track">
+            <div className="video-progress-fill" style={{ width: `${progress * 100}%` }} />
+            <div className="video-progress-handle" style={{ left: `${progress * 100}%` }} />
+          </div>
+        </div>
         <button type="button" className="video-toggle-button" aria-label={previewPlaying ? 'Pause video' : 'Play video'} onClick={togglePlay} onFocus={showControls}>
           {previewPlaying
             ? <svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><rect x="2" y="1" width="6" height="20" /><rect x="12" y="1" width="6" height="20" /></svg>
