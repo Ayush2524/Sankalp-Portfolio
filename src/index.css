@@ -150,3 +150,20 @@ main>.section:nth-child(even){background:#eceae4}
 @media(prefers-reduced-motion:reduce){.contact-modal,.contact-panel,.contact-wipe{transition:none!important;animation:none!important}.contact-modal.is-open .contact-panel{opacity:1;transform:none}.contact-wipe{display:none}.success-mark path{animation:none;stroke-dashoffset:0}.sending-loader b{animation:none}.stat-fade .stat-animated,.stat .stat-label{opacity:1;transform:none;transition:none}}
 @media(prefers-reduced-motion:reduce){.youtube-dialog{opacity:1;transform:none}.youtube-player.is-switching{opacity:1}}
 @media(prefers-reduced-motion:reduce){.video-toggle-button,.video-mute-button,.video-controls .video-toggle-button,.video-controls .video-mute-button{transition:none}}
+
+/* Subtle "Open Chapter" CTA effect, overlaid on the button baked into each cover image */
+.chapter-card{position:relative}
+.cover-cta{position:absolute;z-index:2;border-radius:999px;pointer-events:none;overflow:hidden;
+  background:color-mix(in srgb,var(--accent) 0%,transparent);
+  box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 35%,transparent);
+  transition:background .45s var(--ease),box-shadow .45s var(--ease),transform .45s var(--ease);
+  animation:cta-breathe 3.6s ease-in-out infinite}
+.cover-cta:before{content:"";position:absolute;top:0;bottom:0;left:0;width:45%;
+  background:linear-gradient(100deg,transparent,color-mix(in srgb,var(--accent) 22%,white),transparent);
+  opacity:.55;transform:translateX(-120%) skewX(-18deg);animation:cta-sheen 5.5s var(--ease) 1.2s infinite}
+.chapter-link:hover .cover-cta,.chapter-link:focus-visible .cover-cta{
+  background:color-mix(in srgb,var(--accent) 9%,transparent);
+  box-shadow:0 6px 22px -4px color-mix(in srgb,var(--accent) 45%,transparent),0 0 0 3px color-mix(in srgb,var(--accent) 14%,transparent);
+  transform:translateX(3px) scale(1.025);animation:none}
+@keyframes cta-breathe{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--accent) 0%,transparent)}50%{box-shadow:0 0 0 5px color-mix(in srgb,var(--accent) 12%,transparent)}}
+@keyframes cta-sheen{0%,60%{transform:translateX(-120%) skewX(-18deg)}100%{transform:translateX(330%) skewX(-18deg)}}
