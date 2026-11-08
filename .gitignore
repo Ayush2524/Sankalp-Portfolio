@@ -2,7 +2,6 @@ node_modules/
 dist/
 build/
 .cache/
-.env*
 .vite/
 vite.config.*.timestamp-*
 .next/
@@ -22,3 +21,4 @@ logs/
 # beside it.
 /.plugins/
 /.opencode-skills/
+config.bat

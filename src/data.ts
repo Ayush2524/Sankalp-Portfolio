@@ -62,18 +62,21 @@ export const site = {
   chapters: [
     {
       cover: '/covers/novare-cover.png',
+      cta: { accent: '#7a00e6', left: 13.00, top: 83.86, width: 15.05, height: 9.43 },
       coverMobile: '',
       title: 'Chapter 2: Novare Talent',
       href: '/novare-talent',
     },
     {
       cover: '/covers/freelance-cover.png',
+      cta: { accent: '#e00000', left: 13.25, top: 82.29, width: 15.10, height: 9.43 },
       coverMobile: '',
       title: 'Chapter 1: Freelancing',
       href: '/freelance',
     },
     {
       cover: '/covers/personal-cover.png',
+      cta: { accent: '#05b84f', left: 13.30, top: 82.71, width: 15.10, height: 9.43 },
       coverMobile: '',
       title: 'Never ending chapter : personal brand',
       href: '/personal-brand',
