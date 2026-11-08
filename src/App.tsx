@@ -730,7 +730,7 @@ function Home() {
       <section className="statement section"><Reveal><h2>I don't just make things <em>look good.</em></h2></Reveal><Reveal><div className="statement-copy"><p>I ask <mark>why they should exist</mark>, who they are for, and what they should say.</p><p>Then I turn that thinking into identities, stories and distribution systems that <mark>earn attention and retention.</mark></p></div></Reveal></section>
       <section className="work section" id="work"><Reveal><p className="mono">THREE CHAPTERS</p><h2>Work that earned <em>attention</em></h2></Reveal>
         <div className="chapter-list">{site.chapters.map(c => <Link key={c.href} href={c.href} className="chapter-link">
-          <article className="chapter-card"><picture>{c.coverMobile && <source media="(max-width: 767px)" srcSet={c.coverMobile}/>}<img src={c.cover} alt={`${c.title} cover artwork`} /></picture></article>
+          <article className="chapter-card"><picture>{c.coverMobile && <source media="(max-width: 767px)" srcSet={c.coverMobile}/>}<img src={c.cover} alt={`${c.title} cover artwork`} /></picture><span className="cover-cta" aria-hidden="true" style={{ '--accent': c.cta.accent, left: `${c.cta.left}%`, top: `${c.cta.top}%`, width: `${c.cta.width}%`, height: `${c.cta.height}%` } as React.CSSProperties} /></article>
           <div className="chapter-caption"><span>{c.title}</span><span className="arrow"><i>→</i></span></div></Link>)}</div>
       </section>
       <section className="about section" id="about"><Reveal><h2>About <em>me</em></h2></Reveal><div className="about-grid"><div className="about-portrait"><img src={site.aboutPortrait} alt="Sankalp Bhitkar writing in a notebook" /></div><div>{site.about.map((p,i) => <p key={i}>{p}</p>)}</div></div></section>
